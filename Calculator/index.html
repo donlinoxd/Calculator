@@ -12,79 +12,136 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form class="calculator" name="calc">
-      <input type="text" class="input" name="input" readonly="" />
-      <span class="ans"></span>
-      <span class="num" onclick="document.calc.input.value =''; calculator()"
-        >AC</span
-      >
-      <span class="num" onclick="document.calc.input.value +='/'; calculator()"
-        >&div;</span
-      >
-      <span class="num" onclick="document.calc.input.value +='*'; calculator()"
-        >&times;</span
-      >
-      <span
-        class="num"
-        onclick="document.calc.input.value = document.calc.input.value.slice(0, -1); calculator()"
-        ><i class="bx bxs-tag-x"></i
-      ></span>
-      <span class="num" onclick="document.calc.input.value +='7'; calculator()"
-        >7</span
-      >
-      <span class="num" onclick="document.calc.input.value +='8'; calculator()"
-        >8</span
-      >
-      <span class="num" onclick="document.calc.input.value +='9'; calculator()"
-        >9</span
-      >
-      <span class="num" onclick="document.calc.input.value +='-'; calculator()"
-        >-</span
-      >
-      <span class="num" onclick="document.calc.input.value +='4'; calculator()"
-        >4</span
-      >
-      <span class="num" onclick="document.calc.input.value +='5'; calculator()"
-        >5</span
-      >
-      <span class="num" onclick="document.calc.input.value +='6'; calculator()"
-        >6</span
-      >
-      <span class="num" onclick="document.calc.input.value +='+'; calculator()"
-        >+</span
-      >
-      <span class="num" onclick="document.calc.input.value +='1'; calculator()"
-        >1</span
-      >
-      <span class="num" onclick="document.calc.input.value +='2'; calculator()"
-        >2</span
-      >
-      <span class="num" onclick="document.calc.input.value +='3'; calculator()"
-        >3</span
-      >
-      <span class="num equal" onclick="calculator()">=</span>
-      <span class="num" onclick="document.calc.input.value +='.'; calculator()"
-        >.</span
-      >
-      <span class="num" onclick="document.calc.input.value +='0'; calculator()"
-        >0</span
-      >
-      <span class="num" onclick="document.calc.input.value +='00'; calculator()"
-        >00</span
-      >
-    </form>
+    <div id="particles-js">
+      <form class="calculator" name="calc">
+        <div class="title">Glassmorphism Calculator</div>
+        <input type="text" class="input" name="input" readonly="" />
+        <div class="ans-container"><span class="ans"></span></div>
+        <span class="num" onclick="document.calc.input.value =''; calculator()"
+          >AC</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='/'; calculator()"
+          >&div;</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='*'; calculator()"
+          >&times;</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value = document.calc.input.value.slice(0, -1); calculator()"
+          ><i class="bx bxs-tag-x"></i
+        ></span>
+        <span
+          class="num"
+          onclick="document.calc.input.value +='7'; calculator()"
+          >7</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='8'; calculator()"
+          >8</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='9'; calculator()"
+          >9</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='-'; calculator()"
+          >-</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='4'; calculator()"
+          >4</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='5'; calculator()"
+          >5</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='6'; calculator()"
+          >6</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='+'; calculator()"
+          >+</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='1'; calculator()"
+          >1</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='2'; calculator()"
+          >2</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='3'; calculator()"
+          >3</span
+        >
+        <input type="submit" value="=" class="num equal" />
+        <span
+          class="num"
+          onclick="document.calc.input.value +='.'; calculator()"
+          >.</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='0'; calculator()"
+          >0</span
+        >
+        <span
+          class="num"
+          onclick="document.calc.input.value +='00'; calculator()"
+          >00</span
+        >
+      </form>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script type="text/javascript" src="vanilla-tilt.min.js"></script>
     <script>
+      // CALCULATOR
       function calculator(e) {
-        if (eval(document.calc.input.value) === undefined) {
-          document.querySelector(".ans").innerText = "";
-        } else
-          document.querySelector(".ans").innerText = eval(
-            document.calc.input.value
-          );
+        try {
+          if (eval(document.calc.input.value) === undefined) {
+            document.querySelector(".ans").innerText = "";
+          } else {
+            document.querySelector(".ans").style.display = "block";
+            document.querySelector(".ans").innerText = eval(
+              document.calc.input.value
+            );
+          }
+        } catch {
+          console.log("waiting for input...");
+        }
       }
+      document.querySelector(".calculator").addEventListener("submit", (e) => {
+        e.preventDefault();
+        try {
+          document.querySelector(".ans").style.display = "none";
+          document.calc.input.value = eval(document.calc.input.value);
+        } catch (err) {
+          document.calc.input.value = err;
+        }
+      });
+      /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+      particlesJS.load("particles-js", "particles.json", function () {
+        console.log("callback - particles.js config loaded");
+      });
 
+      //   VANILLA TILT LIBRARY
       VanillaTilt.init(document.querySelector(".calculator"), {
         max: 25,
         speed: 400,
