@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="Calculator/style.css" />
   </head>
   <body>
     <div id="particles-js">
@@ -110,7 +110,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script type="text/javascript" src="vanilla-tilt.min.js"></script>
+    <script
+      type="text/javascript"
+      src="Calculator/vanilla-tilt.min.js"
+    ></script>
     <script>
       // CALCULATOR
       function calculator(e) {
@@ -137,9 +140,13 @@
         }
       });
       /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-      particlesJS.load("particles-js", "particles.json", function () {
-        console.log("callback - particles.js config loaded");
-      });
+      particlesJS.load(
+        "particles-js",
+        "Calculator/particles.json",
+        function () {
+          console.log("callback - particles.js config loaded");
+        }
+      );
 
       //   VANILLA TILT LIBRARY
       VanillaTilt.init(document.querySelector(".calculator"), {
