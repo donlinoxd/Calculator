@@ -131,6 +131,9 @@
       }
       document.querySelector(".calculator").addEventListener("submit", (e) => {
         e.preventDefault();
+        if (answer === undefined) {
+          answer = "";
+        }
         try {
           document.querySelector(".ans-final").style.display = "block";
           document.calc.input.value = "";
