@@ -16,7 +16,9 @@
       <form class="calculator" name="calc">
         <div class="title">Basic Calculator</div>
         <input type="text" class="input" name="input" readonly="" />
-        <div class="ans-container"><span class="ans"></span></div>
+        <div class="ans-container">
+          <span class="ans-final"></span><span class="ans"></span>
+        </div>
         <span class="num" onclick="document.calc.input.value =''; calculator()"
           >AC</span
         >
@@ -91,11 +93,7 @@
           >3</span
         >
         <input type="submit" value="=" class="num equal" />
-        <span
-          class="num"
-          onclick="document.calc.input.value +='.'; calculator()"
-          >.</span
-        >
+        <span class="num storedAns">Ans</span>
         <span
           class="num"
           onclick="document.calc.input.value +='0'; calculator()"
@@ -103,17 +101,20 @@
         >
         <span
           class="num"
-          onclick="document.calc.input.value +='00'; calculator()"
-          >00</span
+          onclick="document.calc.input.value +='.'; calculator()"
+          >.</span
         >
       </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script type="text/javascript" src="vanilla-tilt.min.js"></script>
     <script>
       // CALCULATOR
+      let answer;
+      let storedAns;
+
       function calculator(e) {
+        document.querySelector(".ans-final").style.display = "none";
         try {
           if (eval(document.calc.input.value) === undefined) {
             document.querySelector(".ans").innerText = "";
@@ -122,6 +123,7 @@
             document.querySelector(".ans").innerText = eval(
               document.calc.input.value
             );
+            answer = eval(document.calc.input.value);
           }
         } catch {
           console.log("waiting for input...");
@@ -130,23 +132,23 @@
       document.querySelector(".calculator").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
+          document.querySelector(".ans-final").style.display = "block";
+          document.calc.input.value = "";
+          document.querySelector(".ans-final").innerText = answer;
           document.querySelector(".ans").style.display = "none";
-          document.calc.input.value = eval(document.calc.input.value);
+          storedAns = answer;
         } catch (err) {
           document.calc.input.value = err;
         }
       });
+      document.querySelector(".storedAns").addEventListener("click", () => {
+        document.calc.input.value += storedAns;
+        calculator();
+      });
+
       /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
       particlesJS.load("particles-js", "particles.json", function () {
         console.log("callback - particles.js config loaded");
-      });
-
-      //   VANILLA TILT LIBRARY
-      VanillaTilt.init(document.querySelector(".calculator"), {
-        max: 25,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.3,
       });
     </script>
   </body>
